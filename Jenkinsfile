@@ -1,7 +1,7 @@
 def credential = 'aplikasi'
 def server = 'bahril@27.112.78.215'
 def directory = 'docker-fe/literature-frontend'
-def branch = 'main'
+def branch = 'master'
 
 pipeline{
     agent any
