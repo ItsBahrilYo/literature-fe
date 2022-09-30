@@ -8,7 +8,7 @@ pipeline{
     stages{
         stage ('compose down &  pull'){
             steps{
-                sshagent([secret]) {
+                sshagent([credential]) {
                     sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
                     docker-compose down
                     docker system prune -f
@@ -21,7 +21,7 @@ pipeline{
         }
         stage ('docker build'){
             steps{
-                sshagent([secret]) {
+                sshagent([credential]) {
                     sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose build
@@ -32,7 +32,7 @@ pipeline{
         }
         stage ('docker up'){
             steps{
-                sshagent([secret]) {
+                sshagent([credential]) {
                     sh """ssh -o StrictHostKeyChecking=no ${server} << EOF
                     cd ${directory}
                     docker-compose up -d
